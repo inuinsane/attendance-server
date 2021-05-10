@@ -29,6 +29,13 @@ const userSchema = new mongoose.Schema({
     },
     isActive: {
         type: Boolean,
+        required: true,
+        default: true,
+    },
+    status: {
+        type: String,
+        required: true,
+        default: 'hadir',
     },
     passwordHash: {
         type: String,
@@ -37,10 +44,17 @@ const userSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now(),
+        required: true,
     },
     updatedAt: {
         type: Date,
     },
+    role: {
+        type: String,
+        required: true,
+        enum: ['employee', 'admin'],
+        default: 'employee',
+    }
 });
 
 const User = mongoose.model('user', userSchema);
