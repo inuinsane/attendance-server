@@ -31,12 +31,17 @@ app.listen(port, () => {
 });
 
 // DB Connection
-mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true }, async (err) => {
-    if (err) {
-        await console.error(err);
-    }
-    console.log(`Connected to MongoDB`);
-})
+mongoose.connect(db,
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+
+    }, async (err) => {
+        if (err) {
+            await console.error(err);
+        }
+        console.log(`Connected to MongoDB`);
+    })
 
 
 // Set up Routes 
