@@ -1,28 +1,13 @@
 import express from 'express';
+import { createUser } from '../controllers/UserController.js';
 import auth from '../middleware/auth.js';
 import Employee from '../models/Employee.js';
+import admin from '../middleware/admin.js';
 
 const router = express.Router();
 
 // Create new Employee
-router.post('/', auth, async (req, res) => {
-    try {
-        const { name, jabatan, nip } = req.body;
-
-        const newEmployee = new Employee({
-            name, nip, jabatan
-        });
-        // res.json(newEmployee);
-
-        const savedEmployee = await newEmployee.save();
-        res.json(savedEmployee);
-    }
-    catch (err) {
-        res
-            .status(500)
-            .send(err);
-    }
-})
+router.post('/', [auth, admin], createUser);
 
 // Get employee data
 router.get('/', auth, async (req, res) => {
